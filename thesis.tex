@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 							PKNU Graduate thesis template in LaTeX format
+%
+% Initially created: Hyun Jung Yoon in Biophysics Lab (supervisor. S. Wu), unknown
+% Applicated and provided: Minjae Kim and Gyuho Bae in Statphys Lab (supervisor. S.K. Baek), Fall 2018
+% Functionally enhanced: Jonghoon Kim in Statphys Lab (supervisor. S.K. Baek), Fall 2021
+% Reproduced as a template: Yong Kwon in QSC Lab (supervisor. B.S. Choi), 12/15/2022
+% Editor: "Write down your name here"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{report}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[unicode=true,linktocpage=true,linktoc=all]{hyperref}
+\usepackage{bookmark}
+\usepackage{cleveref}
+% The page size and margins of this thesis template follows A4 size and format regulations during writing a thesis
+% refering to the guideline of PKNU Graudate School. % Use 'showframe' command for viewing lines of margins.
+% When you print your thesis written in this template, please change the page format to 190mm X 260mm
+\usepackage[paperwidth=210mm,paperheight=297mm, 
+top=52mm, bottom=35mm, left=38mm, right=38mm,
+head=0mm, foot=15mm]{geometry}
+%\usepackage{tocloft}
+\usepackage[rightlabels, dotinlabels]{titletoc}
+\usepackage[labelfont=bf]{caption}
+\usepackage{indentfirst}
+\usepackage[para]{threeparttable}
+% \usepackage{adjustbox}
+\usepackage{romannum}
+\usepackage[titletoc, title]{appendix}
+% \usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{setspace}
+\setstretch{1.0}
+
+\captionsetup{font={footnotesize,stretch = 1.2}, format = hang}
+
+% \renewcommand{\contentsname}{{\fontsize{15}{15}\selectfont Contents}}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% \makeatletter
+% \def\@seccntformat#1{\@ifundefined{#1@cntformat}%
+%    {\csname the#1\endcsname\space}%    default
+%    {\csname #1@cntformat\endcsname}}%  enable individual control
+% \newcommand\section@cntformat{\thesection.\space}       % section-level
+% \newcommand\subsection@cntformat{\thesubsection.\space} % subsection-level
+% \newcommand\subsubsection@cntformat{\thesubsubsection.\space} % subsubsection-level
+% \makeatother
+
+\renewcommand{\thefigure}{\Roman{section}-\arabic{figure}}
+\renewcommand{\thetable}{\Roman{section}-\arabic{table}}
+\renewcommand{\theequation}{\Roman{section}.\arabic{equation}}
+
+\def\hchapter#1{\chapter[#1]{\hyperlink{toc}{#1}}}
+\def\hsection#1{\section[#1]{\hyperlink{toc}{#1}}}
+\def\hsubsection#1{\subsection[#1]{\hyperlink{toc}{#1}}}
+
+%\renewcommand{\appendixname}{}
+%\renewcommand{\appendixtocname}{}
+%\renewcommand{\appendixpagename}{}
+
+\begin{document}
+	\input{./dat/00.cover_eng}
+	\input{./dat/01.inside_cover_eng}
+	\input{./dat/02.approval_statement_eng}
+	\input{./dat/03.contents}
+	\input{./dat/04.abstract}
+	\input{./dat/05.introduction}
+	\input{./dat/06.data&method}
+	\input{./dat/07.result}
+	\input{./dat/08.conclusion&discussion}
+	\input{./dat/09.appendix}
+	\input{./dat/10.reference}
+\end{document}
