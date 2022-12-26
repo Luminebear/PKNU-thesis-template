@@ -58,10 +58,11 @@ Thesis template of Pukyong National University in LaTeX format
 학교에서는 아래아 한글 또는 MS 워드에 맞춤화된 작성법을 제시하고 있는 반면
 LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습니다. 
 템플릿 제작에 있어 'Version and History' 의 학생연구원분들께서 작업을 위해 
-본인들의 학위논문 제출을 위해 기초적인 틀을 만들어 주었습니다.
+본인들의 학위논문 제출로 사용한 파일을 활용하였고,
+이것이 본 템플릿의 기초적인 틀을 잡는데 도움이 되었습니다.
 가능한 표준화된 문서로 완성하기 위해 기존 제공받은 파일을 바탕으로, 
 [부경대학교 일반대학원 누리집](https://graduate.pknu.ac.kr/main)의 공지사항의
-'학위청구논문 작성법'을 참고하여 제작 되었습니다.
+'학위청구논문 작성법'을 참고하여 제작 하였습니다.
 최대한 해당 매뉴얼에서 요구하는 양식에 맞게 꾸려지도록 작업 하였으며,
 한국어와 영어 모두 지원하도록 만들었습니다.
 기본적으로 예제파일에서 대부분 사용하는 패키지를 불러오도록 되어 있으나,
@@ -85,10 +86,10 @@ LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습�
 **이에 따르는 책임은 양식을 사용하시는 본인에게 있습니다.** 논문 제출전 검토하시길 바랍니다.
 
 ### 국문논문 작성시
-- command usepackage{kotex} 에서 **옵션으로 hangul 추가**해주세요.
-- environment document 에서 겉표지부터 초록까지 다음을 불러와야 합니다.
+- command: usepackage{kotex} 에서 **옵션으로 hangul 추가**해주세요.
+- environment: document 에서 겉표지부터 초록까지 다음을 불러와야 합니다.
   - '00.cover_kor', '01.inside_cover_kor', '02.approval_statement_kor'
-- 이 양식에서 command document를 아래와 같이 불러와야 합니다.
+- 이 양식에서 command 'document'를 아래와 같이 불러와야 합니다.
 <details>
 <summary>자세히 보기</summary>
 
@@ -114,10 +115,10 @@ LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습�
 - backcover는 back.tex을 이용하여 따로 인쇄하여 사용하세요.
   
 ### 영문논문 작성시
-- command usepackage{kotex} **만** 불러오세요.
-- environment document 에서 겉표지부터 초록까지 다음을 불러와야 합니다.
+- command: usepackage{kotex} **만** 불러오세요.
+- environment: document 에서 겉표지부터 초록까지 다음을 불러와야 합니다.
   - '00.cover_eng', '01.inside_cover_eng', '02.approval_statement_eng'
-- 이 양식에서 command document를 아래와 같이 불러와야 합니다.
+- 이 양식에서 command 'document'를 아래와 같이 불러와야 합니다.
 <details>
 <summary>자세히 보기</summary>
 
@@ -146,5 +147,52 @@ LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습�
 
 # in English
 ## Introduction
+This template is designed for Pukyong National University Graduate School researchers who want to write a thesis in LaTeX. 
+In the university, they only suggest a regularized writing method / example document in HWP or MS WORD. 
+I quite felt to make a standard and optimized format in LaTeX since most scientist use it for submitting their papers.
+To create the template, I referred the existing files used by student researchers 
+who were finished submitting their thesis and it was very helpful for standarization. (See 'Version and History' heading) 
+Based on the provided file, I refered the 'Writing a disseration for a degree' on the notice in PKNU Graduate school website.
+I tried to construct the template fit on their requirements as much as possible. 
+
+This document supports both Korean and English writing. 
+The example file calls popular LaTeX packages in general, 
+you are free to add other useful pacakges for your dissertation. 
+Lastly, I sincerely congratulate users who are completing their degree course, 
+and I cross your fingers in future studies. Good Luck!
 
 ## Usage
+- example main file name: thesis.tex, printed file: thesis.pdf
+- biblography file name: thesis.bib (use BibTeX)
+- documentclass: report, 12pt
+- You can use 'hchapter, hsection, hsubsection' commands for hyperlink in a document insead of 'chapter, section, subsection'.
+- A4 is prepared for a default document format, set 190mm X 260mm if you need for printing. (But in the guideline, you don't need to set the special size for writing a thesis on a computer.)
+- Call usepackage{kotex} for Korean abstract. Do not include option 'hangul' in square bracket '[]'
+- You must import the files '00.cover_eng', '01.inside_cover_eng', '02.approval_statement_eng' in a document environment from a cover to abstract. 
+Example:
+<details>
+<summary>See more</summary>
+
+```latex
+\begin{document}
+	\input{./dat/00.cover_eng}
+	\input{./dat/01.inside_cover_eng}
+	\input{./dat/02.approval_statement_eng}
+	\input{./dat/03.contents}
+	\input{./dat/04.abstract}
+	\input{./dat/05.introduction}
+	\input{./dat/06.data&method}
+	\input{./dat/07.result}
+	\input{./dat/08.conclusion&discussion}
+	\input{./dat/09.appendix}
+	\input{./dat/10.reference}
+\end{document}
+```
+
+</details>
+
+- The English abstract is printed first, followed by the Korean abstract.
+- Use 'back_end.tex' if you need to print a backcover.
+
+This template was made for matching the manual provided by the school as closely as possible, but it may differ from the actual results. 
+Please review your thesis before submitting. **No responsibility can be taken for the use of this thesis template.**
