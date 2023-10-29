@@ -3,8 +3,8 @@
 %
 % 							PKNU Graduate thesis LaTeX class
 %
-% @version      0.1
-% @releasedate  Dec 19th, 2022
+% @version      0.2
+% @releasedate  Oct 29th, 2023
 %
 % @author       Kwon, Yong 권용
 %               mailto:rainstar77@pukyong.ac.kr
@@ -14,8 +14,7 @@
 %      + ko.TeX
 %
 % @History
-% Minjae Kim and Gyuho Bae, initially created for master graduation.
-% Jonghoon Kim, functionally enhanced in September 2021.
+% Yong Kwon, updated the template in October 2022.
 % Yong Kwon, started to reporduce as a template in December 2022.
 % 
 % The PKNU thesis class refers KAIST thesis template and POSTECH.
@@ -25,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{PKNU-thesis}[2022/12/19 v0.1 Unofficial PKNU Thesis document class]
+\ProvidesClass{PKNU-thesis}[2023/10/29 v0.2 Unofficial PKNU Thesis document class]
 
 %% 옵션 설정을 위한 boolean 변수선언
 \newif\if@isDoctor
@@ -52,8 +51,10 @@
 \ExecuteOptions{doctor,korean,final}         % doctor,korean,final이 기본값
 \ProcessOptions
 
-%% 10pt,a4paper,onecolumn,oneside 옵션으로 report 클래스 불러오기
-\LoadClass[10pt,a4paper,onecolumn,oneside]{report}
+%% 11pt,a4paper,onecolumn,oneside 옵션으로 report 클래스 불러오기
+\LoadClass[11pt,a4paper,onecolumn,oneside]{report}
+%% 한국어지정시 kotex의 hangul옵션 불러오기
+\if@isKorean\usepackage[hangul]{kotex}\fi
 
 %%들여쓰기
 \usepackage{indentfirst}
@@ -183,7 +184,8 @@ head=0mm, foot=15mm]{geometry}
 	\ifthenelse{\equal{#1}{english}}
 	{\newcommand{\@authorEngFN}{#2}
 		\newcommand{\@authorEngGN}{#3}
-		\newcommand{\@authorEng}{#2, #3}}{}%
+		\newcommand{\@authorEng}{#3 #2}}{}%
+		% \newcommand{\@authorEng}{#2, #3}}{}%
 }
 
 \@onlypreamble{\author}
@@ -362,6 +364,24 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\approvaldate}
 
+%% 날짜 영문표기
+\newcommand{\approvalMonthEng}{%
+	\ifcase\@approvalMonth
+	\or January% 1
+	\or February% 2
+	\or March% 3
+	\or April% 4
+	\or May% 5
+	\or June% 6
+	\or July% 7
+	\or August% 8
+	\or September% 9
+	\or October% 10
+	\or November% 11
+	\or December% 12
+	\fi
+}
+
 % @command refereedate 심사위원논문심사일
 % @param year,month,day 연,월,일 순으로 입력
 \newcommand{\refereedate}[3] {%
@@ -370,10 +390,6 @@ head=0mm, foot=15mm]{geometry}
 	\newcommand{\@refereeDay}{#3}
 }
 \@onlypreamble{\refereedate}
-
-% @command gradyear 졸업년도
-\newcommand{\gradyear}[1]{\newcommand{\@gradYear}{#1}}
-\@onlypreamble{\gradyear}
 
 %%
 %% 필요한 정보 중에 누락된 것이 없는지 점검 --> 제작중. 아직 불완전. 그대로 놔둠
@@ -397,7 +413,7 @@ head=0mm, foot=15mm]{geometry}
 %% 앞표지 Front Cover
 %%
 \newcommand{\makefrontcover}{%
-	\renewcommand{\baselinestretch}{0.0}%
+	\renewcommand{\baselinestretch}{1.3}%
 	\thispagestyle{empty} \noindent%
 	\if@isKorean
 		\begin{center}
@@ -407,7 +423,7 @@ head=0mm, foot=15mm]{geometry}
 				\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}	\\[1.5cm]
 			\fi
 			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}}	\\[7cm]
-			\fontsize{12pt}{12}\selectfont{\@gradYear}
+			\fontsize{12pt}{12}\selectfont{\@approvalYear 년 \@approvalMonth 월} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{부 경 대 학 교 대 학 원}	\\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@authorKor}
@@ -421,7 +437,7 @@ head=0mm, foot=15mm]{geometry}
 			\@affFullNameEng\\[0.5cm]
 			The Graduate School\\[0.5cm]
 			Pukyong National University\\[1cm]}
-			\fontsize{12pt}{14}\selectfont{\@approvalMonth~\@approvalDay, \@approvalYear}\\[1cm]
+			\fontsize{12pt}{14}\selectfont{\approvalMonthEng, \@approvalYear}\\[1cm]
 		\end{center} \newpage
 	\fi
 }
@@ -442,7 +458,7 @@ head=0mm, foot=15mm]{geometry}
 			\fi
 			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
 			\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
-			\fontsize{14pt}{14}\selectfont{이 논문을 석사학위논문으로 제출함} \\[1cm]
+			\fontsize{14pt}{14}\selectfont{이 논문을 석사학위논문으로 제출함.} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{부 경 대 학 교 대 학 원} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
@@ -457,7 +473,7 @@ head=0mm, foot=15mm]{geometry}
 			\fontsize{12pt}{12}\selectfont{\@degreeName} \\[1cm]
 			\fontsize{12pt}{12}\selectfont{in \@affFullNameEng, The Graduate School,\\
 			Pukyong National University}\\[1cm]
-			\fontsize{12pt}{14}\selectfont{\@approvalMonth,~\@approvalYear}\\[1cm]
+			\fontsize{12pt}{14}\selectfont{\approvalMonthEng,~\@approvalYear}\\[1cm]
 		\end{center} \newpage
 	\fi
 } 
@@ -477,26 +493,48 @@ head=0mm, foot=15mm]{geometry}
 				\fontsize{22pt}{22}\selectfont{\@authorKor 의 이학석사 학위논문을 인준함.} \\[1.5cm]
 			\fi
 			\fontsize{12pt}{12}\selectfont{\@approvalYear년 \@approvalMonth월 \@approvalDay일} \\[9cm]
-			\begin{tabular}{lllllll}
-					\fontsize{16pt}{16}\selectfont 위~~원~~장 &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeChief &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
-					\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeSecond &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
-					\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeThird &  & \fontsize{16pt}{16}\selectfont (인)
-			\end{tabular}
+			\if@isDoctor
+				\begin{tabular}{lllllll}
+						\fontsize{16pt}{16}\selectfont 위~~원~~장 &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeChief &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeSecond &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원 &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeThird &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeFourth &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeFifth &  & \fontsize{16pt}{16}\selectfont (인)
+				\end{tabular}
+			\else
+				\begin{tabular}{lllllll}
+						\fontsize{16pt}{16}\selectfont 위~~원~~장 &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeChief &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeSecond &  & \fontsize{16pt}{16}\selectfont (인) \\[1em]
+						\fontsize{16pt}{16}\selectfont 위~~~~~~~원  &  & \fontsize{16pt}{16}\selectfont 이학박사 &  & \fontsize{16pt}{16}\selectfont \@refereeThird &  & \fontsize{16pt}{16}\selectfont (인)
+				\end{tabular}
+			\fi
 		\end{center} \newpage
 	\else
 		\begin{center}
 			\fontsize{14pt}{14}\selectfont{\@titleEng} \\[3cm]
 			\fontsize{12pt}{12}\selectfont{A dissertation\\ by\\ \@authorEng} \\[1.5cm]
 		\end{center}
-		\fontsize{10pt}{10}\selectfont{Approved by:\\[1cm]
-		\rule{6cm}{0.5pt}\\[-0.1cm]
-		(Chairman)~~~~\@refereeChief\\[1cm]
-		\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
-		(Member)~~~~\@refereeSecond\hspace{2.5cm}(Member)~~~~\@refereeThird\\[1cm]
-		\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
-		(Member)~~~~\@refereeFourth\hspace{2.5cm}(Member)~~~~\@refereeFifth\\[1cm]}
+		\if@isDoctor
+			\fontsize{10pt}{10}\selectfont{Approved by:\\[2cm]
+			\rule{6cm}{0.5pt}\\[-0.1cm]
+			(Chairman)~~~~\@refereeChief\\[1cm]
+			\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
+			(Member)~~~~\@refereeSecond\hspace{2.5cm}(Member)~~~~\@refereeThird\\[1cm]
+			\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
+			(Member)~~~~\@refereeFourth\hspace{2.5cm}(Member)~~~~\@refereeFifth\\[1cm]}
+		\else
+			\begin{center}
+				\fontsize{10pt}{10}\selectfont{Approved by:\\[1cm]
+				\rule{8cm}{0.5pt}\\[-0.0cm]
+				(Chairman)~~~~\@refereeChief\\[2cm]
+				\rule{8cm}{0.5pt}\\[-0.0cm]
+				(Member)~~~~\@refereeSecond\\[2cm]
+				\rule{8cm}{0.5pt}\\[-0.0cm]
+				(Member)~~~~\@refereeThird\\[2cm]}
+			\end{center}
+		\fi
 		\begin{center}
-			\fontsize{12pt}{12}\selectfont{\@approvalMonth~\@approvalDay, \@approvalYear}
+			\fontsize{12pt}{12}\selectfont{\approvalMonthEng~\@approvalDay, \@approvalYear}
 		\end{center} \newpage
 	\fi
 }
@@ -508,16 +546,56 @@ head=0mm, foot=15mm]{geometry}
 	\pagenumbering{roman}		% 로마자 페이지 시작
 	\newcounter{prepage}
 	\setcounter{prepage}{10}        % 마지막 페이지 번호를 저장
-	\tableofcontents
+	\if@isKorean
+		\renewcommand{\contentsname}{목~차}
+		\renewcommand{\listfigurename}{그림~목차}
+		\renewcommand{\listtablename}{표~목차}
+	\fi
+	\tableofcontents\newpage
+	{\phantomsection
+	\listoffigures
+	\if@isKorean
+	\addcontentsline{toc}{chapter}{그림목차}
+	\else
+	\addcontentsline{toc}{chapter}{List of Figures}
+	\fi
+	}\newpage
+	{\phantomsection
 	\listoftables
-	\listoffigures \newpage}
+	\if@isKorean
+	\addcontentsline{toc}{chapter}{표목차}
+	\else
+	\addcontentsline{toc}{chapter}{List of Tables}
+	\fi
+	}
+	\newpage
+}
 
 
 
 %%
 %% 초록 Abstract
-%% 국문 요약 numbering 수정해야 함. 
-\renewenvironment{abstract}{
+%%
+\renewenvironment{abstract}[2]{
+	\phantomsection
+	\if@isKorean
+		\addcontentsline{toc}{chapter}{논문요약}
+		\abstractkor
+		#2
+		\newpage
+		\abstracteng
+		#1
+	\else
+		\addcontentsline{toc}{chapter}{Abstract}
+		\abstracteng
+		#1
+		\newpage
+		\abstractkor
+		#2
+	\fi
+}
+
+\newcommand{\abstracteng}{
 	\stepcounter{prepage}
 	\begin{center}
 		\fontsize{10pt}{10}\selectfont \@titleEng \\[1cm]
@@ -527,19 +605,16 @@ head=0mm, foot=15mm]{geometry}
 		\fontsize{12pt}{12}\selectfont{\textbf{Abstract}}\\
 	\end{center}
 	\fontsize{10pt}{10}\selectfont
-}{}
-
-\newenvironment{abstractkor}{
-	\pagenumbering{roman}
+}
+\newcommand{\abstractkor}{
 	\stepcounter{prepage}
 	\begin{center}
-		\fontsize{10}{10}\selectfont{\@titleKor \\[1cm]
+		\fontsize{10pt}{10}\selectfont{\@titleKor \\[1cm]
 		\@authorKor \\[1cm] 부 경 대 학 교~~~대 학 원~~~\@affFullNameKor\\[1cm]
-		\textbf{요~~~~약}\\[1cm]}
+		\textbf{요~~~~약}}
 	\end{center}
-	\vspace{-0.5cm}
-	\fontsize{8pt}{8}\selectfont
-}{}
+	\fontsize{8pt}{12}\selectfont
+}
 
 
 
@@ -547,7 +622,7 @@ head=0mm, foot=15mm]{geometry}
 %% 핵심 낱말 생성
 %%
 \newenvironment{Korkeyword}{\vspace*{3mm}
-	\noindent \underline{\textbf{핵 심 낱 말}} }{}
+	\noindent \underline{\textbf{핵 심 낱 말}}}{}
 
 
 
@@ -560,6 +635,21 @@ head=0mm, foot=15mm]{geometry}
 }
 
 
+
+%%
+%% Acknowledgement 사사 생성
+%%i
+
+\newcommand{\acknowledgement}[1][default]{%     % 사사
+	\newcommand{\@acklang}{#1}
+	\ifthenelse{\equal{\@acklang}{1}}
+	{\chapter*{사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{사 사}}{}                 % 본문과 사사가 둘 다 한글일 때
+	\ifthenelse{\equal{\@acklang}{2}}
+	{\chapter*{영 문 사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{영 문 사 사}}{}         % 본문은 한글인데 사사가 영어일 때
+	\ifthenelse{\equal{\@acklang}{3}}
+	{\chapter*{Acknowledgement} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments}}{}        % 본문과 사사가 둘 다 영어일 때 
+	\ifthenelse{\equal{\@acklang}{4}}
+	{\chapter*{Acknowledgements in Korean} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments in Korean}}{}\noindent}         % 본문은 영어인데 사사가 한글일 때 
 
 %%
 %% 참고문헌 Bibliography
