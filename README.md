@@ -1,6 +1,9 @@
 # PKNU-thesis-template (Unofficial)
 Thesis template of Pukyong National University in LaTeX format
 
+(This template will be deprecated after an automated thesis template for PKNU is officially released.
+If you look up the updates or download unstable template, see [here](https://github.com/Luminebear/PKNU-thesis-template/tree/new_automatic_format).)
+
 ## Version and History
 - ver20221219
 
@@ -11,7 +14,7 @@ Thesis template of Pukyong National University in LaTeX format
 - Functionally enhanced, Fall 2021 
   - Jonghoon Kim in Statphys Lab (supervisor. S.K. Baek)
 - Reproduced as a template, 12/15/2022
-  - Yong Kwon in QSC Lab (supervisor. B.S. Choi)
+  - Yong Kwon in QCS Lab (supervisor. B.S. Choi)
   
 ## Directory structure
 ```bash
