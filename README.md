@@ -4,6 +4,11 @@ Automated thesis template for Pukyong National University in LaTeX format
 (Stable version (not automated): [main branch](https://github.com/Luminebear/PKNU-thesis-template/))
 
 ## Version and History
+- ver20231130
+	- Added command `refsign` to fill a signature of referees in an approval statement
+	- Optimized the layout of an approval statement in English.
+	- Added the signature of Erwin Schrodinger's as an example one.
+
 - ver20231029
 	- Updated abstract environment to contain Korean and English abstract simultaneously
 	- Corrected some missing points in the template
@@ -74,7 +79,8 @@ Automated thesis template for Pukyong National University in LaTeX format
 		- pdfdoc : 선택하지 않으면 북마크와 colorlink를 만들지 않습니다.
 - 기본 용지포맷은 A4으로 설정되어 있으며, 인쇄시 4.6배판(190mm X 260mm) 이용하세요. (현재는 pknu-thesis.cls에서 직접수정해야함.)
 - 겉표지, 속표지, 인준서, 목차는 pknu-thesis.cls에 정의되어 있습니다.
-- 초록(논문요약)은 작성하는 언어에 따라 순서가 달리 배치되며, 내용작성은 언어 관계조이 영문, 국문 순으로 작성해야 합니다. (아래 자세히보기 참조)
+- 인준서의 경우 기본적으로 사인(영문), 인감(국문)을 기입을 요구합니다.
+- 초록(논문요약)은 작성하는 언어에 따라 순서가 달리 배치되며, 내용작성은 언어 관계없이 영문, 국문 순으로 작성해야 합니다. (아래 자세히보기 참조)
 - 이 양식에서 command 'document'를 아래와 같이 불러와야 합니다.
 <details>
 <summary>자세히 보기</summary>
@@ -108,8 +114,8 @@ Automated thesis template for Pukyong National University in LaTeX format
   
 ### 영문논문 작성시
 - command: 옵션으로 english 설정해주세요.
-- 논문 요약은 영어, 한국어순으로 배치됩니다.
-- backcover는 back_eng.tex을 이용하여 따로 인항하여 사용하세요.
+- 논문 요약은 영어, 한국어순으로 배치됩니다쇄
+- backcover는 back_eng.tex을 이용하여 따로 인쇄하여 사용하세요.
 
 ## 양식 사용시 주의사항
 - 이 양식은 학교에서 제공하는 매뉴얼대로 최대한 맞추고자 하였으나, 실제 규격과 다를 수 있습니다.
@@ -140,6 +146,8 @@ Lastly, I sincerely congratulate users who are completing their degree course, a
 		- final  | draft
 		- pdfdoc : Generate bookmark and colorlink if enabled.
 - A4 is prepared for a default document format, set 190mm X 260mm if you need for printing. (But in the guideline, you don't need to set the special size for writing a thesis on a computer.)
+- Front cover, inner cover, approval statement, and table of contents are already defined in `pknu-thesis.cls`
+- The approval statement basically requires to fill signatures(in English).
 - The English abstract is printed first, followed by the Korean abstract.
 Example:
 <details>

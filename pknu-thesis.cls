@@ -3,8 +3,8 @@
 %
 % 							PKNU Graduate thesis LaTeX class
 %
-% @version      0.2
-% @releasedate  Oct 29th, 2023
+% @version      0.3
+% @releasedate  Nov 30th, 2023
 %
 % @author       Kwon, Yong 권용
 %               mailto:rainstar77@pukyong.ac.kr
@@ -14,8 +14,8 @@
 %      + ko.TeX
 %
 % @History
-% Yong Kwon, updated the template in October 2022.
-% Yong Kwon, started to reporduce as a template in December 2022.
+% Yong Kwon, updated the template in October 2023.
+% Yong Kwon, started to reproduce as a template in December 2022.
 % 
 % The PKNU thesis class refers KAIST thesis template and POSTECH.
 % KAIST: https://github.com/0xdkay/kaist-thesis-template
@@ -24,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{PKNU-thesis}[2023/10/29 v0.2 Unofficial PKNU Thesis document class]
+\ProvidesClass{PKNU-thesis}[2023/11/30 v0.3 Unofficial PKNU Thesis document class]
 
 %% 옵션 설정을 위한 boolean 변수선언
 \newif\if@isDoctor
@@ -136,8 +136,8 @@ urlcolor=darkcyan,          %cyan
 \AtEndDocument{}                             % \end{document}와 함께 실행
 
 %% 편집용지 설정
-% The page size and margins of this thesis template follows A4 size and format regulations during writing a thesis
-% refering to the guideline of PKNU Graudate School. % Use 'showframe' command for viewing lines of margins.
+% The page size and margins of this thesis template follows A4 size and format regulations during writing a thesis refering to the guideline of PKNU Graudate School. 
+% Use 'showframe' command for viewing lines of margins.
 % When you print your thesis written in this template, please change the page format to 190mm X 260mm
 \usepackage[paperwidth=210mm,paperheight=297mm, 
 top=52mm, bottom=35mm, left=38mm, right=38mm,
@@ -303,6 +303,66 @@ head=0mm, foot=15mm]{geometry}
 		\renewcommand{\@degreeField}{#2}
 		\renewcommand{\@degreeversion}{#3}}{}
 %% Engineering		
+	\ifthenelse{\equal{#1}{IT}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{IT융합응용공학과}
+		\renewcommand{\@childDeptNameEng}{Department of IT Convergence & Application Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{IT Convergence & Application Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
+	\ifthenelse{\equal{#1}{CM}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{컴퓨터공학과}
+		\renewcommand{\@childDeptNameEng}{Department of Computer Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{Computer Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
+	\ifthenelse{\equal{#1}{MC}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{기계공학과}
+		\renewcommand{\@childDeptNameEng}{Department of Mechanical Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{Mechanical Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
+	\ifthenelse{\equal{#1}{RA}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{냉동공조공학과}
+		\renewcommand{\@childDeptNameEng}{Department of Refrigeration and Air-conditioning Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{Refrigeration and Air-conditioning Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
+	\ifthenelse{\equal{#1}{EC}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{전기공학과}
+		\renewcommand{\@childDeptNameEng}{Department of Electrical Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{Electrical Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
+	\ifthenelse{\equal{#1}{ER}}
+	{\renewcommand{\@degreeCode}{\@degreePrefix #1}
+		\renewcommand{\@childDeptNameKor}{전자공학과}
+		\renewcommand{\@childDeptNameEng}{Department of Electronic Engineering}
+		\renewcommand{\@parentDeptNameKor}{}
+		\renewcommand{\@parentDeptNameEng}{}
+		\renewcommand{\@parentAcademNameEng}{}
+		\renewcommand{\@childAcademNameEng}{Electronic Engineering}
+		\renewcommand{\@degreeField}{#2}
+		\renewcommand{\@degreeversion}{#3}}{}
 	
 	\renewcommand{\@affFullNameKor}{%               % 학과/전공 한글이름
 		\ifthenelse{\equal{\@parentDeptNameKor}{}}
@@ -325,15 +385,15 @@ head=0mm, foot=15mm]{geometry}
 			\ifthenelse{\equal{\@degreeversion}{b}}{\@parentAcademNameEng \ (\@childAcademNameEng)}{}%
 			\ifthenelse{\equal{\@degreeversion}{c}}{\@childAcademNameEng}{}}
 	}
-	
+
 	\renewcommand{\@degreeName}{%                       % 학위 영문이름
 		\ifthenelse{\boolean{@isDoctor}}
 		{Doctor of Philosophy} {%                 % 박사는 모두 Ph.D.
 			\ifthenelse{\equal{\@degreeField}{science}}
 			{Master of Science}{}%               % 이학석사는 M.S.
 			\ifthenelse{\equal{\@degreeField}{engineering}}
-%			{Master of Science in Engineering}{}%           % 공학석사는 M.E.
-			{Master of Science}{}%           % 공학석사는 M.S.
+			{Master of Engineering}{}%           % 공학석사는 M.E.
+			% {Master of Science}{}%           % 공학석사는 M.S.
 			\ifthenelse{\equal{\@degreeField}{business}}
 			{Master of Business Administration}{}% 경영학석사는 M.B.A.
 		}
@@ -354,6 +414,16 @@ head=0mm, foot=15mm]{geometry}
 	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifth} {#2}} {}%
 }
 \@onlypreamble{\referee}
+
+% @command signature of referee
+\newcommand{\refsign}[2][1]{%
+	\ifthenelse{\equal{#1}{1}}{\newcommand{\@refereeChiefsign} {#2}} {}%
+	\ifthenelse{\equal{#1}{2}}{\newcommand{\@refereeSecondsign}{#2}} {}%
+	\ifthenelse{\equal{#1}{3}}{\newcommand{\@refereeThirdsign} {#2}} {}%
+	\ifthenelse{\equal{#1}{4}}{\newcommand{\@refereeFourthsign}{#2}} {}%
+	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifthsign} {#2}} {}%
+}
+\@onlypreamble{\refsign}
 
 % @command approvaldate 지도교수논문승인일
 % @param year,month,day 연,월,일 순으로 입력
@@ -424,7 +494,7 @@ head=0mm, foot=15mm]{geometry}
 			\fi
 			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}}	\\[7cm]
 			\fontsize{12pt}{12}\selectfont{\@approvalYear 년 \@approvalMonth 월} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{부 경 대 학 교 대 학 원}	\\[1cm]
+			\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원}	\\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@authorKor}
 		\end{center} \newpage
@@ -453,16 +523,23 @@ head=0mm, foot=15mm]{geometry}
 		\begin{center}
 			\if@isDoctor
 				\fontsize{14pt}{14}\selectfont{이 학 박 사 학 위 논 문}	\\[1.5cm]
+				\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
+				\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
+				\fontsize{14pt}{14}\selectfont{이 논문을 이학박사 학위논문으로 제출함.} \\[2cm]
+				\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
 			\else
 				\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}	\\[1.5cm]
+				\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
+				\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
+				\fontsize{14pt}{14}\selectfont{이 논문을 이학석사 학위논문으로 제출함.} \\[2cm]
+				\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
+				\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
 			\fi
-			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
-			\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
-			\fontsize{14pt}{14}\selectfont{이 논문을 석사학위논문으로 제출함.} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{부 경 대 학 교 대 학 원} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
 			\end{center} \newpage
 	\else
 		\begin{center}
@@ -516,21 +593,38 @@ head=0mm, foot=15mm]{geometry}
 		\end{center}
 		\if@isDoctor
 			\fontsize{10pt}{10}\selectfont{Approved by:\\[2cm]
-			\rule{6cm}{0.5pt}\\[-0.1cm]
-			(Chairman)~~~~\@refereeChief\\[1cm]
-			\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
-			(Member)~~~~\@refereeSecond\hspace{2.5cm}(Member)~~~~\@refereeThird\\[1cm]
-			\rule{6cm}{0.5pt}\hspace{1cm}\rule{6cm}{0.5pt}\\[-0.1cm]
-			(Member)~~~~\@refereeFourth\hspace{2.5cm}(Member)~~~~\@refereeFifth\\[1cm]}
+			\begin{tabular}{ll}
+				\includegraphics[width=0.35\textwidth]{\@refereeChiefsign} & \\[-0.5cm]
+				\rule{6cm}{0.5pt} & \\[-0.1cm]
+				(Chairman)~~~~\@refereeChief & \\[1.5cm]
+				\includegraphics[width=0.35\textwidth]{\@refereeSecondsign} &
+				\includegraphics[width=0.35\textwidth]{\@refereeThirdsign} \\[-0.5cm]
+				\rule{6cm}{0.5pt}\hspace{1cm} &
+				\rule{6cm}{0.5pt}\hspace{1cm} \\[-0.1cm]
+				(Member)~~~~\@refereeSecond &
+                (Member)~~~~\@refereeThird \\[1.5cm]
+                \includegraphics[width=0.35\textwidth]{\@refereeFourthsign} &
+                \includegraphics[width=0.35\textwidth]{\@refereeFifthsign} \\[-0.5cm]
+                \rule{6cm}{0.5pt}\hspace{1cm} &
+                \rule{6cm}{0.5pt}\hspace{1cm} \\[-0.1cm]
+                (Member)~~~~\@refereeFourth &
+                (Member)~~~~\@refereeFifth \\[1.5cm]
+			\end{tabular}
+			}
 		\else
 			\begin{center}
-				\fontsize{10pt}{10}\selectfont{Approved by:\\[1cm]
-				\rule{8cm}{0.5pt}\\[-0.0cm]
-				(Chairman)~~~~\@refereeChief\\[2cm]
-				\rule{8cm}{0.5pt}\\[-0.0cm]
-				(Member)~~~~\@refereeSecond\\[2cm]
-				\rule{8cm}{0.5pt}\\[-0.0cm]
-				(Member)~~~~\@refereeThird\\[2cm]}
+				\fontsize{10pt}{10}\selectfont{Approved by:\\[1.5cm]
+				\begin{tabular}{c}
+					\includegraphics[width=0.4\textwidth]{\@refereeChiefsign} \\[-0.5cm]
+					\rule{8cm}{0.5pt}\\[-0.0cm]
+					(Chairman)~~~~\@refereeChief\\[1.5cm]
+					\includegraphics[width=0.4\textwidth]{\@refereeSecondsign} \\[-0.5cm]
+					\rule{8cm}{0.5pt}\\[-0.0cm]
+					(Member)~~~~\@refereeSecond\\[1.5cm]
+					\includegraphics[width=0.4\textwidth]{\@refereeThirdsign} \\[-0.5cm]
+					\rule{8cm}{0.5pt}\\[-0.0cm]
+					(Member)~~~~\@refereeThird\\[1.5cm]
+				\end{tabular}}
 			\end{center}
 		\fi
 		\begin{center}
@@ -610,7 +704,7 @@ head=0mm, foot=15mm]{geometry}
 	\stepcounter{prepage}
 	\begin{center}
 		\fontsize{10pt}{10}\selectfont{\@titleKor \\[1cm]
-		\@authorKor \\[1cm] 부 경 대 학 교~~~대 학 원~~~\@affFullNameKor\\[1cm]
+		\@authorKor \\[1cm] 부~~경~~대~~학~~교~~~~~대~~학~~원~~~~~\@affFullNameKor\\[1cm]
 		\textbf{요~~~~약}}
 	\end{center}
 	\fontsize{8pt}{12}\selectfont
