@@ -1,7 +1,7 @@
 # PKNU-thesis-template (Unofficial)
 Automated thesis template for Pukyong National University in LaTeX format
 
-(Previous version (not automated): [v1](https://github.com/Luminebear/PKNU-thesis-template/))
+(Previous version (not automated): [v1](https://github.com/Luminebear/PKNU-thesis-template/tree/V1))
 
 ## Version and History
 - ver2.0
@@ -54,8 +54,8 @@ Automated thesis template for Pukyong National University in LaTeX format
 ## 서문
 본 양식은 LaTeX을 사용하여 학위논문을 작성하려는 부경대학교 일반대학원 이공영역 연구자를 위해 제작되었습니다.
 학교에서는 아래아 한글 또는 MS 워드에 맞춤화된 작성법을 제시하고 있는 반면 LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습니다. 
-LaTeX 사용자를 위한 학위논문 템플릿은 기존 기틀을 마련해준 학생연구원분들께서 (v1 브랜치의 'Version and History' 참조) 본인의 학위논문 제출을 위해 만든 파일을 활용한 것을 시작으로 본 템플릿의 기초적인 틀을 잡는데 도움이 되었으며,
-양식 수정의 간소화와 손쉬운 사용을 위해 만들어진 자동화 템플릿(v2)은 KAIST와 POSTECH에서 사용중인 LaTeX양식을 포크하여 부경대학교 상황에 맞추어 제작되고 있습니다.
+LaTeX 사용자를 위한 학위논문 템플릿은 기존 기틀을 마련해준 학생연구원분들께서 (V1 브랜치의 'Version and History' 참조) 본인의 학위논문 제출을 위해 만든 파일을 활용한 것을 시작으로 본 템플릿의 기초적인 틀을 잡는데 도움이 되었으며,
+양식 수정의 간소화와 손쉬운 사용을 위해 만들어진 자동화 템플릿(V2)은 KAIST와 POSTECH에서 사용중인 LaTeX양식을 포크하여 부경대학교 상황에 맞추어 제작되고 있습니다.
 두 학교에서 사용하는 양식의 원본은 아래의 Repository에서 확인할 수 있습니다.
 - [KAIST LaTeX Repository](https://github.com/0xdkay/kaist-thesis-template)
 - [POSTECH LaTeX Repository](https://github.com/lonelywing/POSTECH_thesis_template_latex)
