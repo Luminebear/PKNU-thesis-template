@@ -3,8 +3,8 @@
 %
 % 							PKNU Graduate thesis LaTeX class
 %
-% @version      0.3
-% @releasedate  Nov 30th, 2023
+% @version      2.0
+% @releasedate  Dec 10th, 2023
 %
 % @author       Kwon, Yong 권용
 %               mailto:rainstar77@pukyong.ac.kr
@@ -14,8 +14,14 @@
 %      + ko.TeX
 %
 % @History
-% Yong Kwon, updated the template in October 2023.
-% Yong Kwon, started to reproduce as a template in December 2022.
+% %% V2
+% %%%% Yong Kwon, released the template officially in December 2023.
+% %%%% Yong Kwon, started to reproduce as a template in December 2022.
+% %% Contributions in previous version (V1)
+% %%%% Yong Kwon, reproduced as a template in December 15th, 2022.
+% %%%% Jonghoon Kim, functionally enhanced, Fall 2021.
+% %%%% Minjae Kim and Gyuho Bae, applicated and provided, Fall 2018.
+% %%%% Hyun Jung Yoon, initially created, unknown
 % 
 % The PKNU thesis class refers KAIST thesis template and POSTECH.
 % KAIST: https://github.com/0xdkay/kaist-thesis-template
@@ -24,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{PKNU-thesis}[2023/11/30 v0.3 Unofficial PKNU Thesis document class]
+\ProvidesClass{PKNU-thesis}[2023/12/10 v2.0 Unofficial PKNU Thesis document class]
 
 %% 옵션 설정을 위한 boolean 변수선언
 \newif\if@isDoctor
@@ -187,7 +193,6 @@ head=0mm, foot=15mm]{geometry}
 		\newcommand{\@authorEng}{#3 #2}}{}%
 		% \newcommand{\@authorEng}{#2, #3}}{}%
 }
-
 \@onlypreamble{\author}
 
 % @command advisor 지도교수 이름 (복수가능)
@@ -732,19 +737,16 @@ head=0mm, foot=15mm]{geometry}
 
 %%
 %% Acknowledgement 사사 생성
-%%i
-
+%%
 \newcommand{\acknowledgement}[1][default]{%     % 사사
 	\newcommand{\@acklang}{#1}
+	\if@isKorean % 본문이 한국어일 때
 	\ifthenelse{\equal{\@acklang}{1}}
-	{\chapter*{사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{사 사}}{}                 % 본문과 사사가 둘 다 한글일 때
+	{\chapter*{사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{사 사}}{}
 	\ifthenelse{\equal{\@acklang}{2}}
-	{\chapter*{영 문 사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{영 문 사 사}}{}         % 본문은 한글인데 사사가 영어일 때
-	\ifthenelse{\equal{\@acklang}{3}}
-	{\chapter*{Acknowledgement} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments}}{}        % 본문과 사사가 둘 다 영어일 때 
-	\ifthenelse{\equal{\@acklang}{4}}
-	{\chapter*{Acknowledgements in Korean} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments in Korean}}{}\noindent}         % 본문은 영어인데 사사가 한글일 때 
-
-%%
-%% 참고문헌 Bibliography
-%%
+	{\chapter*{영 문 사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{영 문 사 사}}{}
+	\else % 본문이 영어일 때
+	\ifthenelse{\equal{\@acklang}{1}}
+	{\chapter*{Acknowledgement in Korean} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments in Korean}}{}\noindent
+	\ifthenelse{\equal{\@acklang}{2}}
+	{\chapter*{Acknowledgement} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments}}{}}

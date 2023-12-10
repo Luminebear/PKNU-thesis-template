@@ -3,21 +3,23 @@
 % 							PKNU Graduate thesis template in LaTeX format
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENTCLASS: PKNU-thesis class
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options
+% %%%% doctor: 박사과정 | master:  석사과정
+% %%%% korean: 한글논문 | english: 영문논문
+% %%%% final:  최종판   | draft:   시험판
+% %%%% pdfdoc: 선택하지 않으면 북마크와 colorlink를 만들지 않습니다.(Generate bookmark and colorlink if enabled)
+\documentclass[doctor,english,final,pdfdoc]{PKNU-thesis}
 
 
 
-% % documentclass: 새로 정의한 PKNU-thesis class를 사용
-% %% PKNU-thesis는 세가지 옵션을 제공합니다.
-% %% doctor: 박사과정 | master: 석사과정
-% %% korean: 한글논문 | english: 영문논문
-% %% final: 최종판    | draft: 시험판
-% %% pdfdoc : 선택하지 않으면 북마크와 colorlink를 만들지 않습니다.(Generate bookmark and colorlink if enabled)
-\documentclass[master,english,final,pdfdoc]{PKNU-thesis}
-
-
-
-% % usepackage: 클래스 기본 패키지로 geometry, indentfirst, color
-% %% 필요에따라 \usepackage 명령어를 이용하여 패키지를 이용하면 됩니다.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% USEPACKAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Default package by PKNU-thesis class: geometry, indentfirst, color
+% 필요에따라 \usepackage 명령어로 패키지를 이용하면 됩니다.
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
@@ -34,12 +36,13 @@
 \usepackage{tocloft}
 \usepackage{listings}
 
+% TOC settings
 \renewcommand\cftchapaftersnum{.}
 \renewcommand\cftsecaftersnum{.}
 \renewcommand\cftsubsecaftersnum{.}
 \renewcommand\cftchapnumwidth{2.0em}
 \renewcommand\cftsecnumwidth{1.4em}
-\renewcommand\cftsecindent{2em}
+\renewcommand\cftsecindent{2.0em}
 \renewcommand\cftsubsecnumwidth{2.4em}
 \renewcommand\cftsubsecindent{3.4em}
 
@@ -49,127 +52,189 @@
 
 
 
-% % title 논문 제목(title of thesis)
-% %% options [default: (none)]
-% %% - korean: 한글제목(korean title) | english: 영문제목(english title)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE OF THESIS 논문제목
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options [default: (none)]
+% %%%% korean: 한글제목(korean title) | english: 영문제목(english title)
+%
+% 표지에 출력되는 제목을 강제로 줄바꿈하려면 \linebreak 을 삽입.
+% \\ 나 \newline 등을 사용하면 안됩니다. (아래는 예시)
+% If you want to begin a new line in cover, use \linebreak .
 \title[korean]{다람쥐 헌 쳇바퀴에 타고파}
 \title[english]{The Quick Brown Fox Jumps Over The Lazy Dog}
 
-% @note 표지에 출력되는 제목을 강제로 줄바꿈하려면 \linebreak 을 삽입.
-%       \\ 나 \newline 등을 사용하면 안됩니다. (아래는 예시)
-%
-% If you want to begin a new line in cover, use \linebreak .
-% See examples above.
 
 
-
-% % author 저자 이름
-% %% parameters family_name, given_name 성, 이름을 구분해서 입력
-% %% options [default: (none)]
-% - korean: 한글이름 | chinese: 한문이름 | english: 영문이름
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AUTHOR 저자명
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options [default: (none)]
+% %%%% korean: 한글이름 | chinese: 한문이름 | english: 영문이름
+% %% Parameters 
+% %%%% family_name, given_name 성, 이름을 구분해서 입력
 % ex) \author[english]{family name in english}{given name in english}
 %
 % If you are a foreigner (this means you have no korean name),
 % You must fill the korean name as blank, instead of deleting it or commenting it out.
-% \author[korean]{}{}
-% \author[english]{Donald}{Trump}
 \author[korean]{홍}{길 동}
 \author[english]{Hong}{Gil Dong}
 
 
 
-% % advisor 지도교수 이름 (복수가능)
-% @usage   \advisor[options]{...한글이름...}{...영문이름...}{signed|nosign}
-% @options [default: major동동
-% - major: 주 지도교수  | coopr: 공동 지도교수
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ADVISOR 지도교수
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options [default: major]
+% %%%% major: 주 지도교수  | coopr: 공동 지도교수
+% %% Parameters
+% %%%% 한글이름(in Korean), 영문이름(in English), signed | nosign 
+% ex) \advisor[options]{...한글이름...}{...영문이름...}{signed|nosign}
 \advisor[major]{김 민 수}{Minsoo Kim}{nosign}
 % \advisor[coopr]{옥 영 향}{Younghyang Ok}{nosign}
 %
 % 지도교수 한글이름은 입력하지 않아도 됩니다.
 % You may not input advisor's korean name
-% like this \advisor[major]{}{Chang, Kee Joo}{signed}
-%
+% ex) \advisor[major]{}{Chang, Kee Joo}{signed}
 
-% @command department {학과이름}{학위종류} - 아래 표에 따라 코드를 입력
-% @command department {department code}{degree field}
-%
-% department code table
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEPARTMENT 학과명
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Parameters
+% %%%% department code(학과코드), degree field(학위종류)
+% %%%% 학과코드는 아래 표에 따라 코드를 입력
+% %% Department code table
 % 학위모집요강에 따른 순서를 따름
+%% Natural Science
 % NS    |   간호학과          |   Department of Nursing
 % SC    |   과학컴퓨팅학과    |   Department of Scientific Computing
 % PH    |   물리학과          |   Department of Physics 
 % AM    |   응용수학과        |   Department of Applied Mathematics
 % ST    |   통계학과          |   Department of Statistics
 % CH    |   화학과            |   Department of Chemistry
-%
+%% Engineering
+% IT    |   IT융합응용공학과  |   Department of IT Convergence & Application Engineering
+% CM    |   컴퓨터공학과      |   Department of Computer Engineering
+% MC    |   기계공학과        |   Department of Mechanical Engineering
+% RA    |   냉동공조공학과    |   Department of Refrigeration and Air-conditioning Engineering
+% EC    |   전기공학과        |   Department of Electrical Engineering
+% IT    |   전자공학과        |   Department of Electronic Engineering
+% %% Options for degree field
 % science: 이학 | engineering: 공학 | business : 경영학
 % 박사논문의 경우는 학위종류를 입력하지 않아도 됩니다.
 % If you write Ph.D. dissertation, you cannot input degree field.
+\department{PH}{science}
 
-\department{SC}{science}
 
-% @command studentid 학번(ID)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STUDENT ID
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 비워있어도 무관
 \studentid{}
 
-% @command referee 심사위원 (석사과정 3인, 박사과정 5인)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFREEE 심사위원
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options [enumeration of refrees]
+% %%%% Up to 5
+% %% Parameters
+% %%%% 한글이름(in Korean) or 영문이름(in English)
+% %% 석사과정 3인, 박사과정 5인
+% %% 국문논문 작성시 한글로, 영문논문 작성시 영문이름 기입
+% Of course english name is available
 \referee[1]{홍 상 직}
 \referee[2]{옥 영 향}
 \referee[3]{홍 상 직}
 \referee[4]{옥 영 향}
 \referee[5]{홍 상 직}
-% Of course english name is available
 
-% @command refsign 심사위원 서명
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIGNATURE OF REFREES 심사위원 서명
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Options [enumeration of refrees]
+% %%%% Up to 5
+% %% Parameters
+% %%%% Path of a signature figure
 \refsign[1]{./figure/Erwin_Schrödinger_signature.png}
 \refsign[2]{./figure/Erwin_Schrödinger_signature.png}
 \refsign[3]{./figure/Erwin_Schrödinger_signature.png}
 \refsign[4]{./figure/Erwin_Schrödinger_signature.png}
 \refsign[5]{./figure/Erwin_Schrödinger_signature.png}
 
-% @command approvaldate 학위논문승인일
-% @param   year,month,day 연,월,일 순으로 입력
-\approvaldate{2023}{02}{28}
 
-% @command refereedate 심사위원논문심사일
-% @param   year,month,day 연,월,일 순으로 입력
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPROVAL DATE 학위논문 승인일
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Parameters
+% %%%% Year, Month, Day 연,월,일 순으로 입력
+\approvaldate{2024}{02}{28}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFREEE DATE 심사위원 논문심사일
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Parameters
+% %%%% Year, Month, Day 연,월,일 순으로 입력
 \refereedate{2024}{02}{28}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY 참고문헌 (By BibLaTeX)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{thesis}
-% 본문 시작
-\begin{document}
-    % 앞표지, 속표지, 학위논문 제출승인서, 학위논문 심사완료 검인서는
-    % 클래스 옵션을 final로 지정해주면 자동으로 생성되며,
-    % 반대로 옵션을 draft로 지정해주면 생성되지 않습니다.
 
-    % 목차 (Table of Contents) 생성
-    % \tableofcontents
-    % 그림목차 (List of Figures) 생성
-    % \listoffigures
-    % 표목차 (List of Tables) 생성
-    % \listoftables
 
-    % 위의 세 종류의 목차는 한꺼번에 다음 명령으로 생성할 수도 있습니다.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGINNING OF THE DOCUMENT 문서 시작
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Main Cover, Inner Cover, Approval of Statement 앞표지, 속표지, 학위논문 인준서
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % PKNU-thesis 클래스 옵션을 final로 지정해주면 자동으로 생성, draft로 지정해주면 생성되지 않습니다.
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Table of Contents, List of Figures, List of Tables 목차, 그림목차, 표목차
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Use \tableofcontents, \listoffigures, \listoftables
+    % Or use \makecontents for showing together.
     \makecontents
-    % 초록 (abstract)
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % ABSTRACT 논문요약
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % %% Parameters
+    % %%%% Abstract in English, Abstract in Korean
     % 초록은 한국어논문의 경우 한국어 -> 영어 순으로, 영어논문의 경우 영어 -> 한국어로 생성됩니다.
     % 작성은 논문 종류와 관계없이 반드시 영어, 한국어 순으로 작성해주세요!
     \begin{abstract}
         {\lipsum[1]}
-        {누구든지 체포 또는 구속을 당한 때에는 적부의 심사를 법원에 청구할 권리를 가진다. 
-        위원은 정당에 가입하거나 정치에 관여할 수 없다. 대통령은 국민의 보통·평등·직접·비밀선거에 의하여 선출한다. 
-        정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 
-        국회는 회계연도 개시 30일전까지 이를 의결하여야 한다.
-
-        공개하지 아니한 회의내용의 공표에 관하여는 법률이 정하는 바에 의한다. 
-        모든 국민은 인간으로서의 존엄과 가치를 가지며, 행복을 추구할 권리를 가진다. 
-        국가는 개인이 가지는 불가침의 기본적 인권을 확인하고 이를 보장할 의무를 진다. 
-        국군의 조직과 편성은 법률로 정한다. 국민경제자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다.}
+        {
+            피고인의 자백이 고문·폭행·협박·구속의 부당한 장기화 또는 기망 기타의 방법에 의하여 자의로 진술된 것이 아니라고 인정될 때 또는 정식재판에 있어서 피고인의 자백이 그에게 불리한 유일한 증거일 때에는 이를 유죄의 증거로 삼거나 이를 이유로 처벌할 수 없다.
+            대통령의 국법상 행위는 문서로써 하며, 이 문서에는 국무총리와 관계 국무위원이 부서한다. 
+            군사에 관한 것도 또한 같다. 
+            연소자의 근로는 특별한 보호를 받는다. 
+            감사원은 원장을 포함한 5인 이상 11인 이하의 감사위원으로 구성한다. 
+            모든 국민은 고문을 받지 아니하며, 형사상 자기에게 불리한 진술을 강요당하지 아니한다. 
+            국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다.
+        }
     \end{abstract}
 
-%% 이하의 본문은 LaTeX 표준 클래스 report 양식에 준하여 작성하시면 됩니다.
-%% 하지만 part는 사용하지 못하도록 제거하였으므로, chapter가 문서 내의
-%% 최상위 분류 단위가 됩니다.
-%% You cannot use 'part'
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Main Body 본문
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% 이하의 본문은 LaTeX 표준 클래스 report 양식에 준하여 작성하시면 됩니다.
 
 	\input{./dat/01.introduction}
 	\input{./dat/02.background}
@@ -177,38 +242,36 @@
 	\input{./dat/04.result}
 	\input{./dat/05.conclusionanddiscussion}
 	\input{./dat/06.appendix}
-	% \input{./dat/07.reference}
 
-%%
-%% 참고문헌 시작
-%% References
-%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % BIBLIOGRAPHY 참고문헌
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % For BibLaTeX
+    \addcontentsline{toc}{chapter}{Bibliography}
+    \printbibliography
 
-% For BibLaTeX
-\addcontentsline{toc}{chapter}{Bibliography}
-\printbibliography
+    % For BibTeX / natbib
+    % \let\Section\section
+    % \def\section*#1{\Section*{{\hyperlink{toc}{#1}}}}
+    % \renewcommand{\thesection}{}
+    % \bibliographystyle{chicago}
+    % \bibliography{thesis}
+    % \nocite{apsrev42Control}
+    % \bibliographystyle{./revtex4-2_bst/apsrev4-2}
+    % \bibliography{thesis}
+    % Copy and Paste the code in .bib file below
+    % @CONTROL{REVTEX42Control}
+    % @CONTROL{apsrev42Control,author="00",editor="1",pages="1",title="0",year="0"}
 
-% For BibTeX / natbib
-% \let\Section\section
-% \def\section*#1{\Section*{{\hyperlink{toc}{#1}}}}
-% \renewcommand{\thesection}{}
-% \bibliographystyle{chicago}
-% \bibliography{thesis}
-% \nocite{apsrev42Control}
-% \bibliographystyle{./revtex4-2_bst/apsrev4-2}
-% \bibliography{thesis}
-% Copy and Paste the code in .bib file below
-% @CONTROL{REVTEX42Control}
-% @CONTROL{apsrev42Control,author="00",editor="1",pages="1",title="0",year="0"}
-
-%%
-%% 감사의 글 시작
-%% Acknowledgement
-%%
-% @command acknowledgement 감사의글
-% @options [default: 클래스 옵션 korean|english]
-% - korean : 한글타이틀 | english : 영문타이틀
-    \acknowledgement[4]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % ACKNOWLEDGEMENT 감사의 글
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % %% Options [enumeration of refrees]
+    % %%%% 1: English thesis, and acknowledgement
+    \acknowledgement[1]
     Don't be afraid to give up the good to go for the great. - John D. Rockfeller
-%% 본문 끝
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF THE DOCUMENT 문서 끝
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
