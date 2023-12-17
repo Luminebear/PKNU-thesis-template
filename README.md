@@ -4,6 +4,12 @@ Automated thesis template for Pukyong National University in LaTeX format
 (Previous version (not automated): [v1](https://github.com/Luminebear/PKNU-thesis-template/tree/V1))
 
 ## Version and History
+- ver2.1
+	- Fixed word spacing and line spacing were different in English and PhD option.
+	- Fixed an issue which inserting extra space before comma in an inner cover and abstract page in Engish option.
+	- Updated more detailed explanation in pknu-thesis.cls.
+	- Optimized the Korean input-related code in the source code of pknu-sis.cls.
+
 - ver2.0
 	- Official release version of automated thesis template
 	- Added more detailed explanation for usage in thesis.tex.

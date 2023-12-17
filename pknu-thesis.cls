@@ -3,8 +3,8 @@
 %
 % 							PKNU Graduate thesis LaTeX class
 %
-% @version      2.0
-% @releasedate  Dec 10th, 2023
+% @version      2.1
+% @releasedate  Dec 17th, 2023
 %
 % @author       Kwon, Yong 권용
 %               mailto:rainstar77@pukyong.ac.kr
@@ -30,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{PKNU-thesis}[2023/12/10 v2.0 Unofficial PKNU Thesis document class]
+\ProvidesClass{PKNU-thesis}[2023/12/10 v2.1 Unofficial PKNU Thesis document class]
 
 %% 옵션 설정을 위한 boolean 변수선언
 \newif\if@isDoctor
@@ -59,18 +59,27 @@
 
 %% 11pt,a4paper,onecolumn,oneside 옵션으로 report 클래스 불러오기
 \LoadClass[11pt,a4paper,onecolumn,oneside]{report}
+%% 편집용지 설정
+% The page size and margins of this thesis template follows A4 size and format regulations during writing a thesis refering to the guideline of PKNU Graudate School. 
+% Use 'showframe' command for viewing lines of margins.
+% When you print your thesis written in this template, please change the page format to 190mm X 260mm
+\RequirePackage[paperwidth=210mm,paperheight=297mm, 
+top=52mm, bottom=35mm, left=38mm, right=38mm,
+head=0mm, foot=15mm]{geometry}
 %% 한국어지정시 kotex의 hangul옵션 불러오기
-\if@isKorean\usepackage[hangul]{kotex}\fi
+\if@isKorean
+\RequirePackage[hangul,nonfrench]{kotex}
+\else
+\RequirePackage[nonfrench]{kotex}
+\linespread{1.333}
+\fi
 
 %%들여쓰기
 \usepackage{indentfirst}
 \setlength\parindent{2.0em}
 
-\RequirePackage{ifthen}       % 추가 패키지 설정
-
-%%%% Hangul-ucs preamble.......
-\RequirePackage[nonfrench]{dhucs}
-%\RequirePackage[default]{dhucs-interword}
+% 추가 패키지 설정
+\RequirePackage{ifthen}
 \RequirePackage{ifpdf}
 \ifpdf
 \def\@drivername{pdftex}
@@ -80,11 +89,11 @@
 \if@dvips
 \def\@drivername{dvips}
 \fi
-
 %\ifpdf
 %  \input glyphtounicode\pdfgentounicode=1
 %\fi
 
+%% 색상 설정
 \RequirePackage[\@drivername]{graphicx,xcolor}
 
 \usepackage{color}
@@ -127,32 +136,6 @@ urlcolor=darkcyan,          %cyan
 ]{hyperref}
 \fi
 
-
-%% for compatability to HLaTeX
-\let\gt\sffamily
-\DeclareTextFontCommand{\textgt}{\gt}
-%%%% end of Hangul-ucs preamble
-
-\AtBeginDocument{%                           % \begin{document}와 함께 실행
-	\checkparameters                        % 문서 변수가 올바른지 점검
-	\if@isFinal                             % final 옵션이 지정되어 있으면
-	\makefrontcover \maketitle         % 앞표지, 속표지 생성
-	\makeapproval                      % 제출승인서, 심사완료검인 생성
-	\else \fi }
-\AtEndDocument{}                             % \end{document}와 함께 실행
-
-%% 편집용지 설정
-% The page size and margins of this thesis template follows A4 size and format regulations during writing a thesis refering to the guideline of PKNU Graudate School. 
-% Use 'showframe' command for viewing lines of margins.
-% When you print your thesis written in this template, please change the page format to 190mm X 260mm
-\usepackage[paperwidth=210mm,paperheight=297mm, 
-top=52mm, bottom=35mm, left=38mm, right=38mm,
-head=0mm, foot=15mm]{geometry}
-
-%% 줄간격 설정
-%\renewcommand{\baselinestretch}{1.3}
-\linespread{1.3}
-
 %% 본문이 영어로 되어있는지 한글로 되어있는지 설정
 \newcommand{\@korean}{korean}
 \newcommand{\@english}{english}
@@ -163,13 +146,13 @@ head=0mm, foot=15mm]{geometry}
 \let\@textlang\@english                 % 텍스트 기본언어는 영문
 \fi
 
-%%
-%% 문서 정보 변수 정의
-%%
-
-% @command title 논문 제목
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 문서 정보 변수 정의
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% @command title | TITLE OF THESIS 논문제목
 % @options [default: (none)]
 % - korean: 한글제목 | english: 영문제목
+%%
 \renewcommand{\title}[2][korean] {%
 	\ifthenelse{\equal{#1}{korean}}%
 	{\newcommand{\@titleKor}{#2}}{}%
@@ -178,10 +161,12 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\title}
 
-% @command author 저자 이름
+%%
+% @command author | AUTHOR 저자명
 % @param family_name, given_name 성, 이름을 구분해서 입력
 % @options [default: (none)]
 % - korean: 한글이름 | english: 영문이름
+%%
 \renewcommand{\author}[3][korean] {%
 	\ifthenelse{\equal{#1}{korean}}
 	{\newcommand{\@authorKorFN}{#2}
@@ -195,9 +180,11 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\author}
 
-% @command advisor 지도교수 이름 (복수가능)
+%%
+% @command advisor | ADVISOR 지도교수
 % @options [default: major]
 % - major: 주 지도교수  | coopr: 부 지도교수 (공동지도교수 경우)
+%%
 \newcommand{\advisor}[4][major]{%
 	\ifthenelse{\equal{#1}{major}} {%       % 주 지도교수이면
 		\newcommand{\@advisorMajorKor}{#2} % 한글이름 저장
@@ -226,11 +213,9 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\advisor}
 
-%% 제출승인서에 들어가는 교수님 정보 명령
-\newcommand{\advisorinfo}[1]{\newcommand{\@advisorinfo}{#1}}
-
+%%
 % @command department 
-%
+%%
 \newcommand{\@degreeCode}{}          % 학위 영문코드
 \newcommand{\@degreeName}{}          % 학위명
 \newcommand{\@degreeversion}{}       % 학과 표현 종류
@@ -368,7 +353,7 @@ head=0mm, foot=15mm]{geometry}
 		\renewcommand{\@childAcademNameEng}{Electronic Engineering}
 		\renewcommand{\@degreeField}{#2}
 		\renewcommand{\@degreeversion}{#3}}{}
-	
+
 	\renewcommand{\@affFullNameKor}{%               % 학과/전공 한글이름
 		\ifthenelse{\equal{\@parentDeptNameKor}{}}
 		{\@childDeptNameKor}{%
@@ -377,23 +362,15 @@ head=0mm, foot=15mm]{geometry}
 			\ifthenelse{\equal{\@degreeversion}{c}}{\@childDeptNameKor}{}}
 	}
 	\renewcommand{\@affFullNameEng}{%               % 학과/전공 영문이름
-		\ifthenelse{\equal{\@parentDeptNameEng}{}}
-		{\@childDeptNameEng}{%
-			\ifthenelse{\equal{\@degreeversion}{a}}{\@parentDeptNameEng}{}%
-			\ifthenelse{\equal{\@degreeversion}{b}}{\@parentDeptNameEng \ (\@childDeptNameEng)}{}%
-			\ifthenelse{\equal{\@degreeversion}{c}}{\@childDeptNameEng}{}}
+		\ifthenelse{\equal{\@parentDeptNameEng}{}}{\@childDeptNameEng}
 	}
 	\renewcommand{\@appFullAcademName}{%               % 학문 승인서용 영문이름
-		\ifthenelse{\equal{\@parentAcademNameEng}{}}
-		{\@childAcademNameEng}{%
-			\ifthenelse{\equal{\@degreeversion}{a}}{\@parentAcademNameEng}{}%
-			\ifthenelse{\equal{\@degreeversion}{b}}{\@parentAcademNameEng \ (\@childAcademNameEng)}{}%
-			\ifthenelse{\equal{\@degreeversion}{c}}{\@childAcademNameEng}{}}
+		\ifthenelse{\equal{\@parentAcademNameEng}{}}{\@childAcademNameEng}
 	}
 
 	\renewcommand{\@degreeName}{%                       % 학위 영문이름
 		\ifthenelse{\boolean{@isDoctor}}
-		{Doctor of Philosophy} {%                 % 박사는 모두 Ph.D.
+		{Doctor of Philosophy}{%                 % 박사는 모두 Ph.D.
 			\ifthenelse{\equal{\@degreeField}{science}}
 			{Master of Science}{}%               % 이학석사는 M.S.
 			\ifthenelse{\equal{\@degreeField}{engineering}}
@@ -406,32 +383,40 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\department}
 
-% @command studentid 학번
+%%
+% @command studentid | STUDENT ID 학번
+%%
 \newcommand{\studentid}[1]{\newcommand{\@studentID}{#1}}
 \@onlypreamble{\studentid}
 
+%%
 % @command referee 심사위원 (석사과정 3인, 박사과정 5인)
+%%
 \newcommand{\referee}[2][1] {%
-	\ifthenelse{\equal{#1}{1}}{\newcommand{\@refereeChief} {#2}} {}%
-	\ifthenelse{\equal{#1}{2}}{\newcommand{\@refereeSecond}{#2}} {}%
-	\ifthenelse{\equal{#1}{3}}{\newcommand{\@refereeThird} {#2}} {}%
-	\ifthenelse{\equal{#1}{4}}{\newcommand{\@refereeFourth}{#2}} {}%
-	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifth} {#2}} {}%
+	\ifthenelse{\equal{#1}{1}}{\newcommand{\@refereeChief} {#2}}{}%
+	\ifthenelse{\equal{#1}{2}}{\newcommand{\@refereeSecond}{#2}}{}%
+	\ifthenelse{\equal{#1}{3}}{\newcommand{\@refereeThird} {#2}}{}%
+	\ifthenelse{\equal{#1}{4}}{\newcommand{\@refereeFourth}{#2}}{}%
+	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifth} {#2}}{}%
 }
 \@onlypreamble{\referee}
 
+%%
 % @command signature of referee
+%%
 \newcommand{\refsign}[2][1]{%
-	\ifthenelse{\equal{#1}{1}}{\newcommand{\@refereeChiefsign} {#2}} {}%
-	\ifthenelse{\equal{#1}{2}}{\newcommand{\@refereeSecondsign}{#2}} {}%
-	\ifthenelse{\equal{#1}{3}}{\newcommand{\@refereeThirdsign} {#2}} {}%
-	\ifthenelse{\equal{#1}{4}}{\newcommand{\@refereeFourthsign}{#2}} {}%
-	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifthsign} {#2}} {}%
+	\ifthenelse{\equal{#1}{1}}{\newcommand{\@refereeChiefsign} {#2}}{}%
+	\ifthenelse{\equal{#1}{2}}{\newcommand{\@refereeSecondsign}{#2}}{}%
+	\ifthenelse{\equal{#1}{3}}{\newcommand{\@refereeThirdsign} {#2}}{}%
+	\ifthenelse{\equal{#1}{4}}{\newcommand{\@refereeFourthsign}{#2}}{}%
+	\ifthenelse{\equal{#1}{5}}{\newcommand{\@refereeFifthsign} {#2}}{}%
 }
 \@onlypreamble{\refsign}
 
+%%
 % @command approvaldate 지도교수논문승인일
 % @param year,month,day 연,월,일 순으로 입력
+%%
 \newcommand{\approvaldate}[3] {%
 	\newcommand{\@approvalYear}{#1}
 	\newcommand{\@approvalMonth}{#2}
@@ -457,8 +442,10 @@ head=0mm, foot=15mm]{geometry}
 	\fi
 }
 
+%%
 % @command refereedate 심사위원논문심사일
 % @param year,month,day 연,월,일 순으로 입력
+%%
 \newcommand{\refereedate}[3] {%
 	\newcommand{\@refereeYear}{#1}
 	\newcommand{\@refereeMonth}{#2}
@@ -466,24 +453,16 @@ head=0mm, foot=15mm]{geometry}
 }
 \@onlypreamble{\refereedate}
 
-%%
-%% 필요한 정보 중에 누락된 것이 없는지 점검 --> 제작중. 아직 불완전. 그대로 놔둠
-%%
-\newcommand{\checkparameters}{%
-	\@ifundefined{@titleKor}{%
-		\ClassError{kaist}{The korean title is not found}{}}{}
-	\@ifundefined{@titleEng}{%
-		\ClassError{kaist}{The english title is not found}{}}{}
-	\@ifundefined{@authorKor}{%
-		\ClassError{kaist}{The korean name of the author is not found}{}}{}
-	\@ifundefined{@authorEng}{%
-		\ClassError{kaist}{The english name of the author is not found}{}}{}
-	\@ifundefined{@advisorMajorKor}{%
-		\ClassError{kaist}{The korean name of the major advisor is not found}{}}{}
-	\@ifundefined{@advisorMajorEng}{%
-		\ClassError{kaist}{The english name of the major advisor is not found}{}}{}
-}
 
+\AtBeginDocument{%                           % \begin{document}와 함께 실행
+	\if@isFinal                             % final 옵션이 지정되어 있으면
+	\makefrontcover \maketitle        % 앞표지, 속표지 생성
+	\makeapproval                      % 제출승인서, 심사완료검인 생성
+	\else \fi }
+\AtEndDocument{}                             % \end{document}와 함께 실행
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 문서 양식 변수 정의
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% 앞표지 Front Cover
 %%
@@ -509,7 +488,7 @@ head=0mm, foot=15mm]{geometry}
 			\fontsize{22pt}{22}\selectfont\textbf{\@titleEng}\\[7cm]
 			\fontsize{14pt}{14}\selectfont{by\\[0.5cm]
 			\@authorEng\\[0.5cm]
-			\@affFullNameEng\\[0.5cm]
+			\@affFullNameEng{}\\[0.5cm]
 			The Graduate School\\[0.5cm]
 			Pukyong National University\\[1cm]}
 			\fontsize{12pt}{14}\selectfont{\approvalMonthEng, \@approvalYear}\\[1cm]
@@ -553,7 +532,7 @@ head=0mm, foot=15mm]{geometry}
 			\fontsize{14pt}{14}\selectfont{by\\ \@authorEng} \\[4cm]
 			\fontsize{12pt}{12}\selectfont{A thesis submitted in partial fulfillment of the requirements\\ for the degree of} \\[1cm]
 			\fontsize{12pt}{12}\selectfont{\@degreeName} \\[1cm]
-			\fontsize{12pt}{12}\selectfont{in \@affFullNameEng, The Graduate School,\\
+			\fontsize{12pt}{12}\selectfont{in \@affFullNameEng{}, The Graduate School,\\
 			Pukyong National University}\\[1cm]
 			\fontsize{12pt}{14}\selectfont{\approvalMonthEng,~\@approvalYear}\\[1cm]
 		\end{center} \newpage
@@ -564,7 +543,7 @@ head=0mm, foot=15mm]{geometry}
 %% 학위논문 심사완료 인준서 Approval Statement
 %%
 %% 논문위원수에 따른 설정 만들어야 함.
-\newcommand{\makeapproval}{%% 학위논문 심사완료 검인서
+\newcommand{\makeapproval}{%
 	\renewcommand{\baselinestretch}{1.3}
 	\thispagestyle{empty} \noindent
 	\if@isKorean
@@ -596,8 +575,8 @@ head=0mm, foot=15mm]{geometry}
 			\fontsize{14pt}{14}\selectfont{\@titleEng} \\[3cm]
 			\fontsize{12pt}{12}\selectfont{A dissertation\\ by\\ \@authorEng} \\[1.5cm]
 		\end{center}
-		\if@isDoctor
-			\fontsize{10pt}{10}\selectfont{Approved by:\\[2cm]
+		\if@isDoctor{
+			\fontsize{10pt}{10}\selectfont{Approved by: \\[2cm]
 			\begin{tabular}{ll}
 				\includegraphics[width=0.35\textwidth]{\@refereeChiefsign} & \\[-0.5cm]
 				\rule{6cm}{0.5pt} & \\[-0.1cm]
@@ -615,7 +594,7 @@ head=0mm, foot=15mm]{geometry}
                 (Member)~~~~\@refereeFourth &
                 (Member)~~~~\@refereeFifth \\[1.5cm]
 			\end{tabular}
-			}
+			}}
 		\else
 			\begin{center}
 				\fontsize{10pt}{10}\selectfont{Approved by:\\[1.5cm]
@@ -699,7 +678,7 @@ head=0mm, foot=15mm]{geometry}
 	\begin{center}
 		\fontsize{10pt}{10}\selectfont \@titleEng \\[1cm]
 		\fontsize{10pt}{10}\selectfont{\@authorEng \\[1cm]
-		\@affFullNameEng, The Graduate School,\\[0.1cm]
+		\@affFullNameEng{}, The Graduate School,\\[0.1cm]
 		Pukyong National University\\[1cm]}
 		\fontsize{12pt}{12}\selectfont{\textbf{Abstract}}\\
 	\end{center}
@@ -734,7 +713,7 @@ head=0mm, foot=15mm]{geometry}
 }
 
 
-
+%%%% Need to be fixed
 %%
 %% Acknowledgement 사사 생성
 %%
