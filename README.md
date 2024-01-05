@@ -4,11 +4,17 @@ Automated thesis template for Pukyong National University in LaTeX format
 (Previous version (not automated): [v1](https://github.com/Luminebear/PKNU-thesis-template/tree/V1))
 
 ## Version and History
+- ver2.2
+	- Fixed fatal compilation of writing their acknowledgement in the thesis/dissertation when selected in Korean option.
+	- Changed official full name of Pukyong National University in Korean, from `부경대학교` to `국립부경대학교`
+	- Support automatically changing the degree name following the major in Korean format.
+	- Added new file `thesis-kor.pdf` as an example printed document in Korean option.
+
 - ver2.1
 	- Fixed word spacing and line spacing were different in English and PhD option.
 	- Fixed an issue which inserting extra space before comma in an inner cover and abstract page in Engish option.
 	- Updated more detailed explanation in pknu-thesis.cls.
-	- Optimized the Korean input-related code in the source code of pknu-sis.cls.
+	- Optimized the Korean input-related code in the source code of pknu-thesis.cls.
 
 - ver2.0
 	- Official release version of automated thesis template
@@ -59,7 +65,8 @@ Automated thesis template for Pukyong National University in LaTeX format
 # 국문 설명
 ## 서문
 본 양식은 LaTeX을 사용하여 학위논문을 작성하려는 부경대학교 일반대학원 이공영역 연구자를 위해 제작되었습니다.
-학교에서는 아래아 한글 또는 MS 워드에 맞춤화된 작성법을 제시하고 있는 반면 LaTeX 맞춤화 표준 양식이 따로 없어 템플릿을 만들게 되었습니다. 
+학교에서는 기본적인 논문 제출 규격만을 요구하고, 참고자료로 작성법만을 제시하고 있으며, 아래아 한글, MS 워드, 그리고 LaTeX 등의 워드 프로세서의 공식 양식은 제공하고 있지 않습니다.
+특히 이공계에서는 LaTeX을 자주 사용하는 만큼, 이에 따른 표준 양식이 따로 없어 템플릿을 만들게 되었습니다. 
 LaTeX 사용자를 위한 학위논문 템플릿은 기존 기틀을 마련해준 학생연구원분들께서 (V1 브랜치의 'Version and History' 참조) 본인의 학위논문 제출을 위해 만든 파일을 활용한 것을 시작으로 본 템플릿의 기초적인 틀을 잡는데 도움이 되었으며,
 양식 수정의 간소화와 손쉬운 사용을 위해 만들어진 자동화 템플릿(V2)은 KAIST와 POSTECH에서 사용중인 LaTeX양식을 포크하여 부경대학교 상황에 맞추어 제작되고 있습니다.
 두 학교에서 사용하는 양식의 원본은 아래의 Repository에서 확인할 수 있습니다.
@@ -132,7 +139,7 @@ LaTeX 사용자를 위한 학위논문 템플릿은 기존 기틀을 마련해�
 # in English
 ## Introduction
 This template is designed for Pukyong National University Graduate School researchers who want to write their thesis in LaTeX.
-In the university, they only suggest a regularized writing method / example document in HWP or MS WORD. 
+In the university, they only comply with the format of thesis and suggest a fundamental writing method, not providing example document template in HWP, MS WORD, and LaTeX.
 I quite felt to make a standard and optimized format in LaTeX since most scientist use it for submitting their papers.
 To create the template, I referred the existing files used by student researchers who were finished submitting their thesis and it was very helpful for standarization. (See 'Version and History' heading in V1 branch)
 The advanced version (V2), which supports automation for convinient usage and simplification, have produced and updated refereced by the template of KAIST and POSTECH.

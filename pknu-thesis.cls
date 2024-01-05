@@ -3,8 +3,8 @@
 %
 % 							PKNU Graduate thesis LaTeX class
 %
-% @version      2.1
-% @releasedate  Dec 17th, 2023
+% @version      2.2
+% @releasedate  Jan 5th, 2024
 %
 % @author       Kwon, Yong 권용
 %               mailto:rainstar77@pukyong.ac.kr
@@ -30,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{PKNU-thesis}[2023/12/10 v2.1 Unofficial PKNU Thesis document class]
+\ProvidesClass{PKNU-thesis}[2024/01/05 v2.2 Unofficial PKNU Thesis document class]
 
 %% 옵션 설정을 위한 boolean 변수선언
 \newif\if@isDoctor
@@ -372,7 +372,7 @@ urlcolor=darkcyan,          %cyan
 		\ifthenelse{\boolean{@isDoctor}}
 		{Doctor of Philosophy}{%                 % 박사는 모두 Ph.D.
 			\ifthenelse{\equal{\@degreeField}{science}}
-			{Master of Science}{}%               % 이학석사는 M.S.
+			{Master of Science}{}%           % 이학석사는 M.S.
 			\ifthenelse{\equal{\@degreeField}{engineering}}
 			{Master of Engineering}{}%           % 공학석사는 M.E.
 			% {Master of Science}{}%           % 공학석사는 M.S.
@@ -463,6 +463,9 @@ urlcolor=darkcyan,          %cyan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 문서 양식 변수 정의
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\@unviFullNameEng}{Pukyong National University}
+\newcommand{\@univFullNameKor}{국~립~부~경~대~학~교~대~학~원}
+
 %%
 %% 앞표지 Front Cover
 %%
@@ -472,13 +475,25 @@ urlcolor=darkcyan,          %cyan
 	\if@isKorean
 		\begin{center}
 			\if@isDoctor
-				\fontsize{14pt}{14}\selectfont{이 학 박 사 학 위 논 문}	\\[1.5cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 학 박 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{공 학 박 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{경 영 학 박 사 학 위 논 문}}{}
+				\\[1.5cm]
 			\else
-				\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}	\\[1.5cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{공 학 석 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{경 영 학 석 사 학 위 논 문}}{}
+				\\[1.5cm]
 			\fi
 			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}}	\\[7cm]
 			\fontsize{12pt}{12}\selectfont{\@approvalYear 년 \@approvalMonth 월} \\[1cm]
-			\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원}	\\[1cm]
+			\fontsize{14pt}{14}\selectfont{\@univFullNameKor}	\\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
 			\fontsize{14pt}{14}\selectfont{\@authorKor}
 		\end{center} \newpage
@@ -490,7 +505,7 @@ urlcolor=darkcyan,          %cyan
 			\@authorEng\\[0.5cm]
 			\@affFullNameEng{}\\[0.5cm]
 			The Graduate School\\[0.5cm]
-			Pukyong National University\\[1cm]}
+			\@unviFullNameEng \\[1cm]}
 			\fontsize{12pt}{14}\selectfont{\approvalMonthEng, \@approvalYear}\\[1cm]
 		\end{center} \newpage
 	\fi
@@ -506,24 +521,45 @@ urlcolor=darkcyan,          %cyan
 	\if@isKorean
 		\begin{center}
 			\if@isDoctor
-				\fontsize{14pt}{14}\selectfont{이 학 박 사 학 위 논 문}	\\[1.5cm]
-				\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
-				\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
-				\fontsize{14pt}{14}\selectfont{이 논문을 이학박사 학위논문으로 제출함.} \\[2cm]
-				\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 학 박 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{공 학 박 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{경 영 학 박 사 학 위 논 문}}{}
+				\\[1.5cm]
 			\else
-				\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}	\\[1.5cm]
-				\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
-				\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
-				\fontsize{14pt}{14}\selectfont{이 논문을 이학석사 학위논문으로 제출함.} \\[2cm]
-				\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{부~~경~~대~~학~~교~~대~~학~~원} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
-				\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 학 석 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{공 학 석 사 학 위 논 문}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{경 영 학 석 사 학 위 논 문}}{}
+				\\[1.5cm]
 			\fi
+			\fontsize{22pt}{22}\selectfont{\textbf{\@titleKor}} \\[1.5cm]
+			\fontsize{14pt}{14}\selectfont{지도교수 \@advisorMajorKor} \\[2cm]
+			\if@isDoctor
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 이학박사 학위논문으로 제출함.}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 공학박사 학위논문으로 제출함.}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 경영학박사 학위논문으로 제출함.}}{}
+				\\[2cm]
+			\else
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 이학석사 학위논문으로 제출함.}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 공학석사 학위논문으로 제출함.}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{14pt}{14}\selectfont{이 논문을 경영학석사 학위논문으로 제출함.}}{}
+				\\[2cm]
+			\fi
+			\fontsize{14pt}{14}\selectfont{\@approvalYear년 \@approvalMonth월} \\[1cm]
+			\fontsize{14pt}{14}\selectfont{\@univFullNameKor} \\[1cm]
+			\fontsize{14pt}{14}\selectfont{\@affFullNameKor} \\[1cm]
+			\fontsize{14pt}{14}\selectfont{\@authorKor} \\[1cm]
 			\end{center} \newpage
 	\else
 		\begin{center}
@@ -533,7 +569,7 @@ urlcolor=darkcyan,          %cyan
 			\fontsize{12pt}{12}\selectfont{A thesis submitted in partial fulfillment of the requirements\\ for the degree of} \\[1cm]
 			\fontsize{12pt}{12}\selectfont{\@degreeName} \\[1cm]
 			\fontsize{12pt}{12}\selectfont{in \@affFullNameEng{}, The Graduate School,\\
-			Pukyong National University}\\[1cm]
+			\@unviFullNameEng}\\[1cm]
 			\fontsize{12pt}{14}\selectfont{\approvalMonthEng,~\@approvalYear}\\[1cm]
 		\end{center} \newpage
 	\fi
@@ -549,9 +585,21 @@ urlcolor=darkcyan,          %cyan
 	\if@isKorean
 		\begin{center}
 			\if@isDoctor
-				\fontsize{22pt}{22}\selectfont{\@authorKor 의 이학박사 학위논문을 인준함.} \\[1.5cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 이학박사 학위논문을 인준함.}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 공학박사 학위논문을 인준함.}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 경영학박사 학위논문을 인준함.}}{}
+				\\[1.5cm]
 			\else
-				\fontsize{22pt}{22}\selectfont{\@authorKor 의 이학석사 학위논문을 인준함.} \\[1.5cm]
+				\ifthenelse{\equal{\@degreeField}{science}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 이학석사 학위논문을 인준함.}}{}
+				\ifthenelse{\equal{\@degreeField}{engineering}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 공학석사 학위논문을 인준함.}}{}
+				\ifthenelse{\equal{\@degreeField}{business}}
+				{\fontsize{22pt}{22}\selectfont{\@authorKor 의 경영학석사 학위논문을 인준함.}}{}
+				\\[1.5cm]
 			\fi
 			\fontsize{12pt}{12}\selectfont{\@approvalYear년 \@approvalMonth월 \@approvalDay일} \\[9cm]
 			\if@isDoctor
@@ -688,7 +736,7 @@ urlcolor=darkcyan,          %cyan
 	\stepcounter{prepage}
 	\begin{center}
 		\fontsize{10pt}{10}\selectfont{\@titleKor \\[1cm]
-		\@authorKor \\[1cm] 부~~경~~대~~학~~교~~~~~대~~학~~원~~~~~\@affFullNameKor\\[1cm]
+		\@authorKor \\[1cm] 국~~립~~부~~경~~대~~학~~교~~~~~대~~학~~원~~~~~\@affFullNameKor\\[1cm]
 		\textbf{요~~~~약}}
 	\end{center}
 	\fontsize{8pt}{12}\selectfont
@@ -713,19 +761,22 @@ urlcolor=darkcyan,          %cyan
 }
 
 
-%%%% Need to be fixed
+
 %%
 %% Acknowledgement 사사 생성
 %%
-\newcommand{\acknowledgement}[1][default]{%     % 사사
+\newcommand{\acknowledgement}[1][default]{%
 	\newcommand{\@acklang}{#1}
-	\if@isKorean % 본문이 한국어일 때
-	\ifthenelse{\equal{\@acklang}{1}}
-	{\chapter*{사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{사 사}}{}
-	\ifthenelse{\equal{\@acklang}{2}}
-	{\chapter*{영 문 사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{영 문 사 사}}{}
-	\else % 본문이 영어일 때
-	\ifthenelse{\equal{\@acklang}{1}}
-	{\chapter*{Acknowledgement in Korean} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments in Korean}}{}\noindent
-	\ifthenelse{\equal{\@acklang}{2}}
-	{\chapter*{Acknowledgement} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgments}}{}}
+	\ifthenelse{\equal{\@textlang}{\@korean}}
+	{
+		\ifthenelse{\equal{\@acklang}{1}}
+		{\chapter*{사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{사 사}}{}
+		\ifthenelse{\equal{\@acklang}{2}}
+		{\chapter*{영 문 사 사} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{영 문 사 사}}{}
+	}
+	{
+		\ifthenelse{\equal{\@acklang}{1}}
+		{\chapter*{Acknowledgement in Korean} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgement in Korean}}{}\noindent
+		\ifthenelse{\equal{\@acklang}{2}}
+		{\chapter*{Acknowledgement} \if@PDFdoc\phantomsection\fi\addcontentsline{toc}{chapter}{Acknowledgement}}{}}
+	}
